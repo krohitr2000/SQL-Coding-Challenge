@@ -150,6 +150,7 @@ FROM Crime
 WHERE Status = 'Open'
 GROUP BY IncidentType
 HAVING COUNT(*) > 1;
+-- (No such data is avialble)
 
 --13. List all incidents with suspects whose names also appear as victims in other incidents.
 SELECT C.CrimeID, C.IncidentType, V.VictimID, V.Name, S.SuspectID, S.Name
@@ -157,6 +158,7 @@ FROM Crime C
 JOIN Victim V ON  V.CrimeID = C.CrimeID
 JOIN Suspect S ON S.CrimeID = C.CrimeID
 WHERE S.Name IN (SELECT Name FROM Victim WHERE CrimeID <> C.CrimeID);
+-- (No such data is avialble)
 
 --14. Retrieve all incidents along with victim and suspect details.
 SELECT *FROM Crime C
@@ -176,11 +178,13 @@ FROM Suspect S
 JOIN Crime C ON C.CrimeID=S.CrimeID
 GROUP BY S.SuspectID, S.Name
 HAVING COUNT(C.CrimeID) > 1;
+-- (No such data is avialble)
 
 --17. List incidents with no suspects involved.
 SELECT C.* FROM Crime C
 LEFT JOIN Suspect S ON C.CrimeID = S.CrimeID
 WHERE S.SuspectID IS NULL;
+-- (No such data is avialble)
 
 --18. List all cases where at least one incident is of type 'Homicide' and all other incidents are of type 'Robbery'.
 SELECT*FROM Crime C
